@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'exercicio02';
+
+  livros = [];
+  onLivroAdicionado(livro){
+    this.livros=[...this.livros, livro];
+  }
+
+
 }
