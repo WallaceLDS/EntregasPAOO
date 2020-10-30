@@ -14,6 +14,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { LivroListaComponent } from './livro/livro-lista/livro-lista.component';
 
+import { LivroSevice } from "./livro/livro.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,7 @@ import { LivroListaComponent } from './livro/livro-lista/livro-lista.component';
     MatToolbarModule,
     MatExpansionModule
   ],
-  providers: [],
+  providers: [LivroSevice],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

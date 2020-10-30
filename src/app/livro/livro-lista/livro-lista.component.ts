@@ -1,5 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Livro } from '../livro.model';
+import {LivroSevice} from '../livro.service';
+
+import { Subscription,observable } from "rxjs";
 
 @Component({
   selector: 'app-livro-lista',
@@ -8,10 +11,20 @@ import { Livro } from '../livro.model';
 })
 export class LivroListaComponent implements OnInit {
 
-  @Input() livros: Livro[]= [];
-  constructor() { }
+   livros: Livro[]= [];
+   private clientesSubscription: Subscription;
+  constructor(public livroService: LivroSevice) { }
 
   ngOnInit(): void {
+    this.livros=this.livroService.getLivros();
+    this.clientesSubscription=this.livroService
+    .getListaDeLivrosAtualizadaObservable()
+    .subscribe((livros: Livro[])=>{
+      this.livros=livros;
+    });
+  }
+  ngOnDestroy():void{
+    this.clientesSubscription.unsubscribe();
   }
 
 }
