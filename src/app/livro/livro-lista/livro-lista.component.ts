@@ -16,7 +16,7 @@ export class LivroListaComponent implements OnInit {
   constructor(public livroService: LivroSevice) { }
 
   ngOnInit(): void {
-    this.livros=this.livroService.getLivros();
+    this.livroService.getLivros();
     this.clientesSubscription=this.livroService
     .getListaDeLivrosAtualizadaObservable()
     .subscribe((livros: Livro[])=>{

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; 
+import { HttpClientModule} from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +16,8 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { LivroListaComponent } from './livro/livro-lista/livro-lista.component';
 
 import { LivroSevice } from "./livro/livro.service";
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,9 +34,11 @@ import { LivroSevice } from "./livro/livro.service";
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
-    MatExpansionModule
+    MatExpansionModule,
+
+    HttpClientModule
   ],
-  providers: [LivroSevice],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
