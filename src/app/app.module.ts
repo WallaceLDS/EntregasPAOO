@@ -16,13 +16,16 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { LivroListaComponent } from './livro/livro-lista/livro-lista.component';
 
 import { LivroSevice } from "./livro/livro.service";
+import { CabecalhoComponent } from './cabecalho/cabecalho.component';
 
+import{AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LivroInserirComponent,
-    LivroListaComponent
+    LivroListaComponent,
+    CabecalhoComponent
     
   ],
   imports: [
@@ -36,7 +39,9 @@ import { LivroSevice } from "./livro/livro.service";
     MatToolbarModule,
     MatExpansionModule,
 
-    HttpClientModule
+    HttpClientModule,
+
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -23,6 +23,11 @@ export class LivroListaComponent implements OnInit {
       this.livros=livros;
     });
   }
+
+  onDelete(idm: string){
+    //console.log(idm);
+    this.livroService.removerCliente(idm);
+  }
   ngOnDestroy():void{
     this.clientesSubscription.unsubscribe();
   }

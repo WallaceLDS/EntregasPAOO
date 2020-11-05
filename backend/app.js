@@ -4,25 +4,17 @@ const bodyParser= require('body-parser');
 
 app.use(bodyParser.json());
 
+
+app.use(bodyParser.json());
+
 const Livro = require('./model/livro');
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb+srv://wallace:wallace123@cluster0.jfwyd.mongodb.net/wallace?retryWrites=true&w=majority')
 .then(()=>console.log("Conexão OK"))
 .catch((e)=> console.log("Conexão falhou: "+ e));
-/*app.use((req, res, next)=>{
-    console.log("Chegou um requisição");
-    next();
-});*/
-const livros=[
-    { 
-        id:1234,
-        titulo: 'O Careca',
-        autor: 'Rodrigo',
-        nmpag: 255
 
-    }
-]
+const livros=[];
 
 app.use ((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', "*");
@@ -31,7 +23,7 @@ app.use ((req, res, next) => {
     next();
    });
 
-app.post('/api/clientes',(req,res,next)=>{
+app.post('/api/livros',(req,res,next)=>{
     /*const livro = req.body;
     livros.push(livro);
     console.log(livro);*/
@@ -42,25 +34,21 @@ app.post('/api/clientes',(req,res,next)=>{
         nmpag: req.body.nmpag
     });
     livro.save()
-    .then((document)=>{
-        console.log(`Inserção Ok: ${document}`) ;
+    .then((livroInserido)=>{
+        console.log(`Inserção Ok: ${livroInserido}`) ;
         res.status(201).json({
-        mensagem:'Cliente Inserido'
+        mensagem:'livro Inserido',
+        idm: livroInserido._id
         });
     })
     .catch((error)=>{console.log(`Inserção NOK: ${error}`);
     res.status(404).json({
-            mensagem: 'Cliente não foi Inserido'
+            mensagem: 'livro não foi Inserido'
         })
     })
-});   
+});     
 
-app.use('/api/clientes',(re,res,next)=>{
-    //res.send("Hello from the back end cuzão");
-    /*res.status(200).json({
-        mensagem: 'tudo certo'
-        ,livros:livros
-    });*/
+app.get('/api/livros',(req,res,next)=>{
     Livro.find()
     .then(documents =>{
        res.status(200).json({
@@ -75,6 +63,17 @@ app.use('/api/clientes',(re,res,next)=>{
             livros: []
         })
     })
+});
+
+app.delete('/api/livros/:idm',(req,res,next)=>{
+    //console.log(req.params);
+    Livro.deleteOne({_id: req.params.idm})
+    .then((resultado)=>{
+        console.log(resultado);
+        res.status(200).end();
+    })
+    
+        
 });
 
 module.exports = app;
