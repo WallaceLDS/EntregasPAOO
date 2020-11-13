@@ -1,0 +1,17 @@
+<mat-card *ngFor="let livro of livros">
+  <mat-card-title>{{livro.titulo}}</mat-card-title>
+  <mat-card-content>
+    <p>Autor: {{livro.autor}}</p>
+  </mat-card-content>
+  <mat-card-content>
+    <p>Id: {{livro.id}}</p>
+  </mat-card-content>
+  <mat-card-content>
+    <p>Quantidade de páginas: {{livro.paginas}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button [routerLink]="['/editar',livro.id_mapeado]" routerLinkActive="router-link-active">editar</button>
+    <button mat-button (click)="onDelete(livro.id_mapeado)" >remover</button>
+  </mat-card-actions>
+</mat-card>
+<p *ngIf="livros.length<=0">Nenhum Livro Cadastrado</p>
